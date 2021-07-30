@@ -2,7 +2,7 @@ import "./App.css";
 import React, { useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
 import {Button} from '../ButtonElement' 
-import {ServicesContainer, ServicesCard,ServicesH2,ServicesH1, ServicesP,ServicesIcon} from './ServicesEmlements'
+import {ServicesContainer, ServicesCard,ServicesH2,ServicesH1, ServicesP,ServicesIcon, ServicesValue} from './ServicesEmlements'
 import Icon1 from '../../images/complete.svg'
 import{
   ArrowForward,
@@ -60,12 +60,21 @@ function MTable() {
 
   const displayUsers = data
     .slice(pagesVisited, pagesVisited + usersPerPage)
-    .map((data) => {
+    .map((data) => { 
+      let colorChange = "";
+      if(data.valor_co2 > 1200){
+        colorChange = "#B03A2E";
+      } else if (data.valor_co2<1200 && data.valor_co2 >= 801 ){
+        colorChange = "#F4D03F";
+      }else {
+        colorChange = "#229954";
+      }
       return (
+
         <ServicesCard>
           <ServicesIcon src={"http://localhost:5000/"+data.namefile} />
           <ServicesH1>Lugar: {data.lugar}</ServicesH1>
-          <ServicesH1>Valor : {data.valor_co2}</ServicesH1>
+          <ServicesValue style = {{color : colorChange}}>Valor : {data.valor_co2}</ServicesValue> 
           <ServicesH2>Categoría : {data.categoria}</ServicesH2>
           <ServicesP></ServicesP>
           <Button to = {'/measurement/'+ data.id} onMouseEnter = {onHover} onMouseLeave = {onHover}
