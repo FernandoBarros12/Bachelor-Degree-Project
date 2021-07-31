@@ -1,4 +1,5 @@
 require('dotenv').config();
+require('./db_mongo.js');
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
@@ -37,6 +38,7 @@ app.use((req,res,next)=>{
 
 //Routes
 app.use('/api/measurement',require('./routes/measurement'));
+app.use('/api/mongo-mediciones',require('./routes/mongo_mediciones'));
 
 //Starting the server
 app.listen(app.get('port'),() =>{
