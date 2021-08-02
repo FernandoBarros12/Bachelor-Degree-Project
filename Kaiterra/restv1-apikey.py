@@ -19,12 +19,40 @@ import ast
 
 #Envío de datos
 from pymongo import MongoClient
+import paho.mqtt.client as mqtt
 
 MONGO_URI = 'mongodb+srv://CO2:co2123@cluster0.w68qc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 cliente = MongoClient(MONGO_URI)
 
 db = cliente['co2']
-collection = db['tu-comisariato']
+collection = db['local']
+
+
+######################################## MQTT ########################################################################
+
+
+#Connection success callback
+def on_connect(client, userdata, flags, rc):
+    print('Connected with result code '+str(rc))
+    client.subscribe('testtopic/#')
+
+# Message receiving callback
+def on_message(client, userdata, msg):
+    print(msg.topic+" "+str(msg.payload))
+
+client = mqtt.Client()
+
+# Specify callback function
+client.on_connect = on_connect
+client.on_message = on_message
+
+# Establish a connection
+client.connect('emqx-broker.eastus.cloudapp.azure.com', 1883, 60)
+# Publish a message
+
+
+
+
 
 
 
@@ -63,8 +91,9 @@ def do_get(relative_url, *, params={}, headers={}):
         ##print(content_str)
         diccionario =ast.literal_eval(content_str)
         valor_co2= diccionario['info.aqi']['data']['rco2 (ppm)']
+        client.publish('emqtt',payload=valor_co2,qos=0)
         print(valor_co2)
-        collection.insert_one({"name":"Kaiterra","value":valor_co2})
+        #collection.insert_one({"name":"Kaiterra","value":valor_co2})
 
     response.raise_for_status()
         
@@ -130,3 +159,5 @@ if __name__ == "__main__":
         summarize_laser_egg("dd85475c-a5ef-4a15-b00f-206e408528b2")
         contador+=1
         time.sleep(30)
+
+client.loop_forever()
