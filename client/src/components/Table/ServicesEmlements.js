@@ -63,6 +63,16 @@ export const ServicesH1 = styled.h1`
         font-size: 2rem;
     }
 `
+export const ServicesValue = styled.h1`
+    font-size: 1.6rem;
+    color: #e5e5e5;
+    margin-bottom: -10px;
+    padding-bottom: 10px;
+
+    @media screen and (max-width:480px){
+        font-size: 2rem;
+    }
+`
 
 export const ServicesH2 = styled.h2`
     font-size:1rem;

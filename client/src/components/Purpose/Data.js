@@ -49,7 +49,7 @@ export const co2 = {
     lightBg: false,
     lightText: true,
     lightTextDesc: true,
-    topLine: 'Finalidad del proyecto',
+    topLine: 'Informate',
     headline: 'Limite máximo de CO2 recomendado en lugares cerrados',
     description: 'Este proyecto tiene como prioridad informar a la ciudadina los niveles de CO2 en tiempo real para que puedan tomar las medidas de prevencion del COVID19',
     imgStart: false,

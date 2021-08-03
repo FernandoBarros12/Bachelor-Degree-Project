@@ -5,6 +5,7 @@ import '../components/MeasurementsPoints/MeasurementsPoints.scss';
 import Header from '../components/MeasurementsPoints/Header';
 import Table from '../components/MeasurementsPoints/Table';
 import axios from "axios";
+import {valores} from './constants'
 import { objectOf } from 'prop-types';
 // import { element } from 'prop-types';
 
@@ -17,6 +18,7 @@ const MeasurementsPoints = () => {
     
 const [data, isData] = useState({})
 
+
 const datos = async() => {
   const res = await axios.get('http://localhost:5000/api/mongo-mediciones')
   const objeto=res.data[Object.keys(res.data)[Object.keys(res.data).length-1]]
@@ -24,32 +26,30 @@ const datos = async() => {
 }
 datos()
 
-const valores= (objeto) => {
-  valor_K=tracksData;
-  valor_E=tracksData;
+
+
+function ultimo_valor (objeto){
   if (objeto.name == 'local-K'){
-    nuevo_valor = objeto.valor
-    valor_K=nuevo_valor
-    idnt = 'K'
-    
+    valores.valor_k=objeto.valor
+   
   }else{
-    nuevo_valor = objeto.valor
-    valor_E=nuevo_valor
-    idnt = 'E'
+    valores.valor_E=objeto.valor
+    
   }
-  idnt = 'se queda antiguo'
-  return vlalork,nuevok,valore,nuevoE
+  return objeto.valor
 }
+
+ultimo_valor(data);
 
 
 const tracksData = [
   {
     name: 'Local K',
-    co2: (ultimo_valor(data).idnt) ? ultimo_valor(data).medicion : valor_respaldo(data).medicion,
+    co2: valores.valor_k,
   },
   {
     name: 'Local E',
-    co2: (!ultimo_valor(data).idnt) ? ultimo_valor(data).medicion : valor_respaldo(data).medicion,
+    co2:  valores.valor_E,
   }
   
 ];

@@ -153,11 +153,11 @@ def parse_rfc3339_utc(ts: str) -> datetime:
 
 if __name__ == "__main__":
     contador=0
-    while contador<=119:
+    while contador<=999999999:
         check_available("requests")
         from datetime import datetime, timezone
         summarize_laser_egg("dd85475c-a5ef-4a15-b00f-206e408528b2")
         contador+=1
-        time.sleep(30)
+        time.sleep(5)
 
 client.loop_forever()

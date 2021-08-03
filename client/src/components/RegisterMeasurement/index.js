@@ -29,19 +29,16 @@ class RegisterMearsument extends Component {
   onSubmit = async (e) => {
     e.preventDefault();
     const { user } = this.props.auth0
-    console.log(user)
-    const newMeasurement = {
-      categoria: this.state.categoria,
-      lugar: this.state.lugar,
-      valor_co2: this.state.valor_co2,
-      comentario: this.state.comentario,
-      file: this.state.file,
-      nombre: user.nickname,
-      email: user.email
-    }
-      if (!this.state){
-        alert('you moust upload file');
-        return;
+    if(user){
+      const newMeasurement = {
+        categoria: this.state.categoria,
+        lugar: this.state.lugar,
+        valor_co2: this.state.valor_co2,
+        comentario: this.state.comentario,
+        file: this.state.file,
+        nombre: user.nickname,
+        email: user.email
+        
       }
       try{
         const formdata = new FormData();
@@ -65,6 +62,11 @@ class RegisterMearsument extends Component {
       document.getElementById('measurementload').reset();
       window.location.href = '/community';
       this.setState(null);
+      
+    }else{
+      alert("Debes iniciar sesión")
+    }
+    
   }
 
   onInputChange = (e) => {

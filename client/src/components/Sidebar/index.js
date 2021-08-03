@@ -19,8 +19,8 @@ const Sidebar = ({isOpen,toogle}) => {
                     <SidebarMenu>
                         <SidebarLink to = "/register_measurement"  onClick={toogle}>Subir Medicion</SidebarLink>
                         <SidebarLink to = "/community"  onClick={toogle}>Comunidad</SidebarLink>
-                        <SidebarLink to = "mediciones"  onClick={toogle}>Ver mediciones</SidebarLink>
-                        <SidebarLink to = "mas"  onClick={toogle}>Conoce más</SidebarLink>
+                        <SidebarLink to = "/measurementsPoints"  onClick={toogle}>Puntos de Medición</SidebarLink>
+                        <SidebarLink to = "/more"  onClick={toogle}>Conoce más</SidebarLink>
                     </SidebarMenu>
                 </SidebarWrapper>
             </SidebarContainer>
