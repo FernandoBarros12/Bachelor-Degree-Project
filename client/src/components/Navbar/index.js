@@ -10,12 +10,12 @@ import {
     NavMenu,
     NavItem,
     NavLinks,
-    NavBtn
+    NavBtn,
+    NavDash
 } from './NavbarElements'
 import LogInButton from '../loginButton/index';
 import LogOutButton from '../logoutButton/index';
 import {useAuth0} from "@auth0/auth0-react";
-
 
 const Navbar = ({ toogle }) => {
     const [scrollNav, setScrollNav] = useState(false);
@@ -35,8 +35,7 @@ const Navbar = ({ toogle }) => {
     const toogleHome = () => {
         scroll.scrollToTop();
     }
-    const { isAuthenticated } = useAuth0();
-
+    const { user ,isAuthenticated } = useAuth0();
     return (
         <>
             <IconContext.Provider value={{ colo: '#fff' }}>
@@ -71,11 +70,17 @@ const Navbar = ({ toogle }) => {
                         <NavBtn>
                             {isAuthenticated ? (
                                 <>
+                                    {user.name == "doddy Joel" ?(<>
+                                        <NavDash href="http://localhost:1880/ui/#!/0">Dashboard</NavDash>
+                                    </>):(
+                                        <></>
+                                    )}
                                     <LogOutButton />
                                 </>
                             ) : (
                                 <LogInButton />
                             )}
+
                         </NavBtn>
                     </NavbarContainer>
                 </Nav>
